@@ -54,7 +54,6 @@ class Terraform implements Serializable {
 
     public static ArrayList getParameters(resource) {
         def parameters = []
-        parameters += new ChoiceParameterDefinition("Resource Group", (String[]) resourceGroups.keySet(), "")
         data[resource].each { key, value ->
             if (key.toLowerCase() != 'name' && key.toLowerCase() != 'location'  && key.toLowerCase() != 'resource group') {
                 if (value.keySet().contains('choices')) {
@@ -66,6 +65,9 @@ class Terraform implements Serializable {
                         parameters += new StringParameterDefinition(key, "")
                     }
                 }
+            }
+            if (key.toLowerCase() == 'resource group') {
+                parameters += new ChoiceParameterDefinition("Resource Group", (String[]) resourceGroups.keySet(), "")
             }
         }
         return parameters

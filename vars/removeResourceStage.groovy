@@ -2,32 +2,31 @@ import tf.yaml.Terraform
 
 def call() {
     stage('Remove Resource') {
-        // def types = Terraform.getTypes()
+        // get resource group and type of element to be deleted
         def vals = input message: "Resource Details",
             parameters: [
                 choice(name: 'Type', choices: Terraform.getTypes()),
                 choice(name: 'Resource Group', choices: Terraform.getResourceGroups())
             ]
 
-        print "${vals}"
+        // if element is not resource group
         if (vals['Type'] != 'resource group') {
+            // get list of elements that could be deleted
             def parameters = Terraform.getResourceParameters(vals['Resource Group'], vals['Type'])
         
-            println "checking params..."
+            // prompt user for which element to remove
             if (!parameters.isEmpty()) {
                 vals.putAll(input( message: "Which resource do you want to remove?", parameters: parameters))
             } 
         }
         
-        
-        println "lowercasing everything..."
+        // make keys lowercase for matching
         def resource = [:]
         for (key in vals.keySet()) {
             resource[key.toLowerCase()] = vals[key]
         }
 
-        println "removing..."
-        println "${vals}"
+        // remove resource
         Terraform.removeResource(resource)
     }
 }
