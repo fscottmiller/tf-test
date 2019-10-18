@@ -38,8 +38,9 @@ class Terraform implements Serializable {
         tags = yaml['tags']
     }
 
-    public static void publish(artifactory, file) {
-        ['curl', '-u', 'admin:password', '-T', "'${getYaml()}'", "${artifactory}/Terraform-YAML/${file}"].execute()
+    public static String publish(artifactory, file) {
+        def text = ['curl', '-u', 'admin:password', '-T', "'${getYaml()}'", "${artifactory}/Terraform-YAML/${file}"].execute().text
+        return text
     }
 
     public static ArrayList getTypes() {
