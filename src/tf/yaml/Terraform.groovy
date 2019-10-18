@@ -69,8 +69,8 @@ class Terraform implements Serializable {
                 }
             }
             if (key.toLowerCase() == 'resource group') {
-                j.echo "${resourceGroups.keySet()}"
-                parameters += new ChoiceParameterDefinition("Resource Group", (String[]) resourceGroups.keySet().toList(), "")
+                String[] groups = resourceGroups.keySet().toList()  
+                parameters += new ChoiceParameterDefinition("Resource Group", group, "")
             }
         }
         return parameters
