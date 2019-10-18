@@ -1,4 +1,4 @@
-@Library('tf@stage') _
+@Library('tf@master') _
 import tf.yaml.Terraform
 
 pipeline {
