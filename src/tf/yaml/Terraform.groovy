@@ -39,7 +39,7 @@ class Terraform implements Serializable {
     }
 
     public static void publish(artifactory, file) {
-        ['curl', '-u', 'admin:password', '-T', "<(echo \"${getYaml()}\")", "${artifactory}/Terraform-YAML/${file}"].execute()
+        ['curl', '-u', 'admin:password', '-T', "'${getYaml()}'", "${artifactory}/Terraform-YAML/${file}"].execute()
     }
 
     public static ArrayList getTypes() {
