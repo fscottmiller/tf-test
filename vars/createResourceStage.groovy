@@ -14,6 +14,7 @@ def call() {
         
         // get any additional parameters needed
         echo "getting params"
+        echo "${vals}"
         def parameters = Terraform.getParameters(vals['Type'])
         
         // prompt user with additional parameters
