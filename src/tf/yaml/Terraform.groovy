@@ -18,7 +18,7 @@ class Terraform implements Serializable {
             'Name' : [
                 'alias': 'vm_name',
             ],
-            'Data Disk': [
+            'Data Disks': [
                 'alias': 'data_disk',
             ],
             'Resource Group': [
