@@ -9,6 +9,11 @@ resource groups:
         name: vm1
         location: east us2
         vm_size: D4s_v3
+        data disks:
+          - size: 512gb
+            type: PremiumLRS
+          - size: 256gb
+            type: PremiumLRS
       - type: availability set
         name: availability
         location: West us2
