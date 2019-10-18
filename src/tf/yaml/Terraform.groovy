@@ -53,6 +53,8 @@ class Terraform implements Serializable {
     }
 
     public static ArrayList getParameters(resource,j) {
+        j.echo "----------------------------"
+        j.echo "${resourceGroups.keySet()}"
         def parameters = []
         data[resource].each { key, value ->
             if (key.toLowerCase() != 'name' && key.toLowerCase() != 'location'  && key.toLowerCase() != 'resource group') {
