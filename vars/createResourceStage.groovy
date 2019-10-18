@@ -13,14 +13,17 @@ def call() {
             ]
         
         // get any additional parameters needed
+        echo "getting params"
         def parameters = Terraform.getParameters(vals['Type'])
         
         // prompt user with additional parameters
+        echo "prompting"
         if (!parameters.isEmpty()) {
             vals.putAll(input( message: "Additional Details", parameters: parameters))
         }
 
-        // remove resource
+        // add resource
+        echo "adding"
         Terraform.addResource(vals)
     }
 }
