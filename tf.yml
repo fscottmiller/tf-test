@@ -1,0 +1,15 @@
+tags: 
+  foo: bar
+  
+resource groups:
+  test-rg:
+    location: east-us
+    resources:
+      - type: virtual machine
+        name: vm1
+        location: east us2
+        vm_size: D4s_v3
+      - type: availability set
+        name: availability
+        location: West us2
+
