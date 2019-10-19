@@ -56,6 +56,7 @@ class Terraform implements Serializable {
         j.echo "----------------------------"
         j.echo "${resourceGroups.keySet()}"
         def parameters = []
+        String[] groups = resourceGroups.keySet().toList()
         j.echo " ---------- a ----------------"
         data[resource].each { key, value ->
             j.echo "in loop"
@@ -73,7 +74,7 @@ class Terraform implements Serializable {
             }
             if (key.toLowerCase() == 'resource group') {
                 j.echo "setting rg..."
-                String[] groups = resourceGroups.keySet().toList()
+                
                 j.echo "${groups}"
                 parameters += new ChoiceParameterDefinition("Resource Group", groups, "")
             }
