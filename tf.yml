@@ -1,6 +1,6 @@
 tags: 
   foo: bar
-  
+
 resource groups:
   test-rg:
     location: east-us
