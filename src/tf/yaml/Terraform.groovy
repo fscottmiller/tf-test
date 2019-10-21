@@ -48,7 +48,7 @@ class Terraform implements Serializable {
         def choices = []
         for (resource in resourceGroups[resourceGroup]['resources']) {
             if (resource['type'] == type) {
-                parameters += resource['name']
+                choices += resource['name']
             }
         }
         return new ChoiceParameterDefinition("${type}", choices, "")
