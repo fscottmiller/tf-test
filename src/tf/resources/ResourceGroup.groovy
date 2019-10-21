@@ -16,7 +16,7 @@ class ResourceGroup implements Serializable {
     }
 
     public String getName() {
-        return this.name;
+        return name;
     }
 
     public String getLocation() {
@@ -26,5 +26,5 @@ class ResourceGroup implements Serializable {
     public void addVirtualMachine(VirtualMachine vm) {
         this.virtualMachines += vm
     }
-    
+
 }
