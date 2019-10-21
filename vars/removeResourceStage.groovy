@@ -17,8 +17,8 @@ def call() {
         
             // prompt user for which element to remove
             if (!parameters[0].getChoices().isEmpty()) {
-                vals.putAll(input( message: "Which resource do you want to remove?", parameters: parameters))
-            } 
+                vals['name'] = input( message: "Which resource do you want to remove?", parameters: parameters)
+            }
         }
         
         // make keys lowercase for matching
