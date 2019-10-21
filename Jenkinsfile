@@ -31,7 +31,8 @@ pipeline {
                 input message: "${Terraform.getYaml()}\nAre you sure you want to continue?"
                 script {
                     sh "curl --version"
-                    writeYaml file: "tf.yml", data: "${Terraform.getYaml()}"
+                    sh "rm ${env.FILE}"
+                    writeYaml file: "${env.FILE}", data: "${Terraform.getYaml()}"
                     sh "curl -u admin:password -T tf.yml http://${env.ARTIFACTORY_URL}/Terraform-YAML/${env.FILE}"
                 }
             }
