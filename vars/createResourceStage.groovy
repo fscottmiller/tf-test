@@ -25,6 +25,7 @@ def call() {
 
         // add resource
         echo "adding"
+
         Terraform.addResource(vals)
     }
 }

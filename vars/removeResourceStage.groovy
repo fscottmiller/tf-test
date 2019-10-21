@@ -19,6 +19,7 @@ def call() {
             if (!parameters[0].getChoices().isEmpty()) {
                 vals['name'] = input( message: "Which resource do you want to remove?", parameters: parameters)
             }
+
         }
         
         // make keys lowercase for matching
