@@ -15,7 +15,7 @@ def call() {
             def parameters = Terraform.getResourceParameters(vals['Resource Group'], vals['Type'])
         
             // prompt user for which element to remove
-            if (!parameters.isEmpty()) {
+            if (!parameters.getChoices().isEmpty()) {
                 vals.putAll(input( message: "Which resource do you want to remove?", parameters: parameters))
             } 
         }
