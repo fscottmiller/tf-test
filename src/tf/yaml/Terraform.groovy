@@ -51,7 +51,7 @@ class Terraform implements Serializable {
                 choices += resource['name']
             }
         }
-        return new ChoiceParameterDefinition("${type}", choices, "")
+        return new ChoiceParameterDefinition((String) type, (String[]) choices, "")
     }
 
     public static ArrayList getParameters(resource,j) {
