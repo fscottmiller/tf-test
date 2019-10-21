@@ -22,8 +22,8 @@ pipeline {
                     def rg = new ResourceGroup("rg", "east us")
                     def vm = new VirtualMachine("vm", rg)
 
-                    println rg
-                    println vm
+                    println rg.getName()
+                    println vm.getResourceGroup().getVirtualMachines()[0].getLocation()
                 }
             }
         }

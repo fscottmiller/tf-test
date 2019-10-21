@@ -8,4 +8,12 @@ class VirtualMachine implements Serializable {
         this.name = name;
         this.resourceGroup = resourceGroup;
     }
+
+    public String getName() {
+        return this.name;
+    }
+
+    public String getResourceGroup() {
+        return this.resourceGroup
+    }
 }

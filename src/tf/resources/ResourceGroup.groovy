@@ -11,6 +11,18 @@ class ResourceGroup implements Serializable {
         this.virtualMachines = []
     }
 
+    public VirtualMachine[] getVirtualMachines() {
+        return this.virtualMachines
+    }
+
+    public String getName() {
+        return this.name;
+    }
+
+    public String getLocation() {
+        return this.location;
+    }
+
     public void addVirtualMachine(VirtualMachine vm) {
         this.virtualMachines += vm
     }
