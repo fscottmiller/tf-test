@@ -89,6 +89,13 @@ class Terraform implements Serializable {
         return new ArrayList<>(resourceGroups.keySet())
     }
 
+    public static HashMap getConfig() {
+        def config = [:] 
+        config['resource groups'] = resourceGroups
+        config['tags'] = tags
+        return config
+    }
+
     public static String getJson() {
         def config = [:]
         config['resource groups'] = resourceGroups
