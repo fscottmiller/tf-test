@@ -19,6 +19,7 @@ pipeline {
             steps {
                 cleanWs()
                 git env.repository
+                echo "${env.ARTIFACTORY_URL}/${env.FILE}"
                 script {
                     Terraform.setConfig(env.ARTIFACTORY_URL, env.FILE)
                 }
