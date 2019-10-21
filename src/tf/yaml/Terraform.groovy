@@ -31,8 +31,10 @@ class Terraform implements Serializable {
         ]
     ]
 
-    public static void setConfig(artifactory, file) {
+    public static void setConfig(artifactory, file, j) {
+        j.echo "in function set config"
         def text = ['curl', '-u', 'admin:password', "${artifactory}/Terraform-YAML/${file}"].execute().text
+        j.echo "text: ${text}"
         def yaml = new Yaml().load(text)
         resourceGroups = yaml['resource groups']
         tags = yaml['tags']
