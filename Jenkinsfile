@@ -1,5 +1,6 @@
-@Library('tf@stage') _
+@Library('tf@classes') _
 import tf.yaml.Terraform
+import tf.resources.*
 
 pipeline {
     agent any
@@ -15,28 +16,39 @@ pipeline {
     }
 
     stages {
-        stage('Initialization') {
+        stage('test') {
             steps {
-                cleanWs()
-                git env.repository
-                echo "${env.ARTIFACTORY_URL}/${env.FILE}"
                 script {
-                    Terraform.setConfig(env.ARTIFACTORY_URL, env.FILE, this)
-                }
-                selectStage(params.Action)
-            }
-        }
-        stage('Confirmation') {
-            steps {
-                input message: "${Terraform.getYaml()}\nAre you sure you want to continue?"
-                script {
-                    sh "curl --version"
-                    sh "rm ${env.FILE}"
-                    echo "${Terraform.getYaml()}"
-                    writeYaml file: "${env.FILE}", data: Terraform.getConfig()
-                    sh "curl -u admin:password -T tf.yml ${env.ARTIFACTORY_URL}/Terraform-YAML/${env.FILE}"
+                    def rg = new ResourceGroup("rg", "east us")
+                    def vm = new VirtualMachine("vm", rg)
+
+                    println rg
+                    println vm
                 }
             }
         }
+        // stage('Initialization') {
+        //     steps {
+        //         cleanWs()
+        //         git env.repository
+        //         echo "${env.ARTIFACTORY_URL}/${env.FILE}"
+        //         script {
+        //             Terraform.setConfig(env.ARTIFACTORY_URL, env.FILE, this)
+        //         }
+        //         selectStage(params.Action)
+        //     }
+        // }
+        // stage('Confirmation') {
+        //     steps {
+        //         input message: "${Terraform.getYaml()}\nAre you sure you want to continue?"
+        //         script {
+        //             sh "curl --version"
+        //             sh "rm ${env.FILE}"
+        //             echo "${Terraform.getYaml()}"
+        //             writeYaml file: "${env.FILE}", data: Terraform.getConfig()
+        //             sh "curl -u admin:password -T tf.yml ${env.ARTIFACTORY_URL}/Terraform-YAML/${env.FILE}"
+        //         }
+        //     }
+        // }
     }
 }
