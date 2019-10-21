@@ -5,15 +5,15 @@ import tf.resources.*
 pipeline {
     agent any
 
-    parameters {
-        choice name: 'Action', choices: ['Create Resource', 'Remove Resource']
-    }
+    // parameters {
+    //     choice name: 'Action', choices: ['Create Resource', 'Remove Resource']
+    // }
 
-    environment {
-        FILE = "tf.yml"
-        repository = 'https://github.com/fscottmiller/tf-test'
-        ARTIFACTORY_URL = 'http://192.168.0.27:8081/artifactory'
-    }
+    // environment {
+    //     FILE = "tf.yml"
+    //     repository = 'https://github.com/fscottmiller/tf-test'
+    //     ARTIFACTORY_URL = 'http://192.168.0.27:8081/artifactory'
+    // }
 
     stages {
         stage('test') {
