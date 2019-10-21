@@ -46,7 +46,7 @@ class Terraform implements Serializable {
 
     public static ArrayList getResourceParameters(resourceGroup, type) {
         def parameters = []
-        for (resource in resourceGroups[resourceGroup[resourceGroup]]['resources']) {
+        for (resource in resourceGroups[resourceGroup]['resources']) {
             if (resource['type'] == type) {
                 parameters += new StringParameterDefinition(resource.key, "")
             }
