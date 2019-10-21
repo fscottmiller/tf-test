@@ -21,10 +21,13 @@ pipeline {
                 script {
                     def rg = new ResourceGroup("rg", "east us")
                     def vm = new VirtualMachine("vm", rg)
+                    def vm2 = new VirtualMachine("vm2", rg, "D2_v2")
+                    def vm3 = new VirtualMachine("vm3", rg, "D4s_v3", "East US 4")
 
                     println rg.getName()
                     println vm.getName()
                     println rg.getLocation()
+                    println vm3.getLocation()
                 }
             }
         }
