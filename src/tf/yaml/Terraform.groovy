@@ -18,7 +18,7 @@ class Terraform implements Serializable {
             'Name' : [
                 'alias': 'vm_name',
             ],
-            'Data Disk': [
+            'Data Disks': [
                 'alias': 'data_disk',
             ],
             'Resource Group': [
@@ -31,8 +31,10 @@ class Terraform implements Serializable {
         ]
     ]
 
-    public static void setConfig(artifactory, file) {
+    public static void setConfig(artifactory, file, j) {
+        j.echo "in function set config"
         def text = ['curl', '-u', 'admin:password', "${artifactory}/Terraform-YAML/${file}"].execute().text
+        j.echo "text: ${text}"
         def yaml = new Yaml().load(text)
         resourceGroups = yaml['resource groups']
         tags = yaml['tags']
@@ -43,18 +45,26 @@ class Terraform implements Serializable {
     }
 
     public static ArrayList getResourceParameters(resourceGroup, type) {
-        def parameters = []
-        for (resource in resourceGroup[resourceGroup]['resources']) {
+        def choices = []
+        for (resource in resourceGroups[resourceGroup]['resources']) {
             if (resource['type'] == type) {
-                parameters += new StringParameterDefinition(resource.key, "")
+                choices += resource['name']
             }
         }
-        return parameters
+        def ret = new ChoiceParameterDefinition((String) type, (String[]) choices, "")
+        return ret
     }
 
-    public static ArrayList getParameters(resource) {
+    public static ArrayList getParameters(resource,j) {
+        j.echo "----------------------------"
+        j.echo "${resourceGroups.keySet()}"
         def parameters = []
+        String[] groups = resourceGroups.keySet().toList()
+        j.echo " ---------- a ----------------"
+
         data[resource].each { key, value ->
+            j.echo "in loop"
+            j.echo "${key} : ${value}"
             if (key.toLowerCase() != 'name' && key.toLowerCase() != 'location'  && key.toLowerCase() != 'resource group') {
                 if (value.keySet().contains('choices')) {
                     parameters += new ChoiceParameterDefinition(key, (String[]) value['choices'], "")
@@ -67,14 +77,26 @@ class Terraform implements Serializable {
                 }
             }
             if (key.toLowerCase() == 'resource group') {
-                parameters += new ChoiceParameterDefinition("Resource Group", (String[]) resourceGroups.keySet(), "")
+                j.echo "setting rg..."
+                
+                j.echo "${groups}"
+                parameters += new ChoiceParameterDefinition("Resource Group", groups, "")
+
             }
         }
+        j.echo " ------------ z -----------------"
         return parameters
     }
     
     public static ArrayList getResourceGroups() {
         return new ArrayList<>(resourceGroups.keySet())
+    }
+
+    public static HashMap getConfig() {
+        def config = [:] 
+        config['resource groups'] = resourceGroups
+        config['tags'] = tags
+        return config
     }
 
     public static String getJson() {
