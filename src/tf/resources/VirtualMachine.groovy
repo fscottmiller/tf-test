@@ -10,10 +10,10 @@ class VirtualMachine implements Serializable {
     }
 
     public String getName() {
-        return this.name;
+        return name;
     }
 
     public String getResourceGroup() {
-        return this.resourceGroup
+        return resourceGroup
     }
 }
