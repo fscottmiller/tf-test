@@ -11,7 +11,7 @@ pipeline {
     environment {
         FILE = "tf.yml"
         repository = 'https://github.com/fscottmiller/tf-test'
-        ARTIFACTORY_URL = 'http://localhost:8081/artifactory'
+        ARTIFACTORY_URL = 'http://192.168.0.27:8081/artifactory'
     }
 
     stages {
