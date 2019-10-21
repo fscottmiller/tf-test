@@ -33,7 +33,7 @@ pipeline {
                     sh "curl --version"
                     sh "rm ${env.FILE}"
                     echo "${Terraform.getYaml()}"
-                    writeYaml file: "${env.FILE}", data: "${Terraform.getConfig()}"
+                    writeYaml file: "${env.FILE}", data: Terraform.getConfig()
                     sh "curl -u admin:password -T tf.yml ${env.ARTIFACTORY_URL}/Terraform-YAML/${env.FILE}"
                 }
             }
