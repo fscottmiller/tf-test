@@ -23,7 +23,8 @@ pipeline {
                     def vm = new VirtualMachine("vm", rg)
 
                     println rg.getName()
-                    println vm.getResourceGroup().getVirtualMachines()[0].getLocation()
+                    println vm.getName()
+                    println rg.getLocation()
                 }
             }
         }
