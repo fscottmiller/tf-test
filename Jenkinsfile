@@ -30,6 +30,7 @@ pipeline {
             steps {
                 input message: "${Terraform.getYaml()}\nAre you sure you want to continue?"
                 script {
+                    sh "curl --version"
                     sh "curl -u admin:password -T <(echo '${Terraform.getYaml()}') http://${env.ARTIFACTORY_URL}/Terraform-YAML/${env.FILE}"
                 }
             }
